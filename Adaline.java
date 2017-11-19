@@ -9,8 +9,7 @@ public class Adaline {
     private double Epson=0.1;
     private double taxaAprendizado = 0.5;
     private double erroQuadraticoMedio=0;
-    private double erroQuadraticoMedioAnterior;
-    private double erroQuadraticoMedioAtual;
+    private double erroQuadraticoMedioAnterior=0;
     private int[][] matrizAprendizado = new int[4][3]; //4 linhas para as 4 possibilidades de entrada e 3 colunas: uma para entrada 1, outra para entrada 2 e outra para o valor esperado
 
     Adaline() {
@@ -42,34 +41,32 @@ public class Adaline {
         soma = (x1 * w[0]) + (x2 * w[1]) + (w[2]);
 
         //função de ativação
-       return Math.tanh(soma*taxaAprendizado);
+       return Math.tanh(soma);
     }
 
     public void treinar() {
   
         
         double saida;
-        double saida2;
         for (int i = 0; i < 4; i++) {
             saida = calculo(matrizAprendizado[i][0], matrizAprendizado[i][1]);
-            erroQuadraticoMedioAnterior=calculaErroQuadraticoMedio(i,  saida);
-            corrigirPeso(i,saida);
-            saida2=calculo(matrizAprendizado[i][0], matrizAprendizado[i][1]);
-            erroQuadraticoMedioAtual=calculaErroQuadraticoMedio(i, saida2);
-            
-            
+            calculaErroQuadraticoMedio(i,  saida);
+            corrigirPeso(i,saida);  
         }
        
         
-        if ((erroQuadraticoMedioAtual-erroQuadraticoMedioAnterior >Epson) && (this.contador < this.maxIteracoes)) {
-            treinar();
-             this.contador++;
+        if ((erroQuadraticoMedio-erroQuadraticoMedioAnterior >Epson) && (this.contador < this.maxIteracoes)) {
+           erroQuadraticoMedioAnterior=erroQuadraticoMedio;
+           erroQuadraticoMedio=0;
+           this.contador++;         
+           treinar();
+          
         }
 
     }
     double calculaErroQuadraticoMedio(int i,double saida){
        erroQuadraticoMedio=erroQuadraticoMedio+Math.pow(matrizAprendizado[i][2]-saida, 2);
-       erroQuadraticoMedio=erroQuadraticoMedio/i;
+       erroQuadraticoMedio=erroQuadraticoMedio/4;
         return erroQuadraticoMedio;
     }
 
@@ -87,6 +84,8 @@ public class Adaline {
         System.out.println(" Caso 02 para 0 e 1 " + calculo(0, 1));
         System.out.println(" Caso 03 para 1 e 0 " + calculo(1, 0));
         System.out.println(" Caso 04 para 1 e 1 " + calculo(1, 1));
+ 
+        
        
     }
 
