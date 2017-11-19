@@ -66,7 +66,7 @@ public class Adaline {
     }
     double calculaErroQuadraticoMedio(int i,double saida){
        erroQuadraticoMedio=erroQuadraticoMedio+Math.pow(matrizAprendizado[i][2]-saida, 2);
-       erroQuadraticoMedio=erroQuadraticoMedio/4;
+       erroQuadraticoMedio=erroQuadraticoMedio/(i+1);
         return erroQuadraticoMedio;
     }
 
@@ -75,7 +75,6 @@ public class Adaline {
         w[0] = w[0] + ((matrizAprendizado[i][2] - saida) * matrizAprendizado[i][0] * taxaAprendizado);
         w[1] = w[1] + ((matrizAprendizado[i][2] - saida) * matrizAprendizado[i][1] * taxaAprendizado);
         w[2] = w[2] + ((matrizAprendizado[i][2] - saida) * taxaAprendizado);
-        
     }
 
     void print() {
@@ -84,7 +83,6 @@ public class Adaline {
         System.out.println(" Caso 02 para 0 e 1 " + calculo(0, 1));
         System.out.println(" Caso 03 para 1 e 0 " + calculo(1, 0));
         System.out.println(" Caso 04 para 1 e 1 " + calculo(1, 1));
- 
         
        
     }
