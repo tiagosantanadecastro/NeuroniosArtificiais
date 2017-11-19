@@ -55,10 +55,10 @@ public class Adaline {
         }
        
         
-        if ((erroQuadraticoMedio-erroQuadraticoMedioAnterior >Epson) && (this.contador < this.maxIteracoes)) {
+        if ((Math.abs(erroQuadraticoMedio-erroQuadraticoMedioAnterior)>Epson) && (this.contador < this.maxIteracoes)) {
            erroQuadraticoMedioAnterior=erroQuadraticoMedio;
            erroQuadraticoMedio=0;
-           this.contador++;         
+           this.contador++;        
            treinar();
           
         }
