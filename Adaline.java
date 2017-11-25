@@ -1,4 +1,4 @@
-package NeuroniosArtificiais;
+﻿package NeuroniosArtificiais;
 
 public class Adaline {
 
@@ -38,7 +38,7 @@ public class Adaline {
 
     double calculo(int x1, int x2) {
 
-        soma = (x1 * w[0]) + (x2 * w[1]) + (w[2]);
+        soma = (x1 * w[0]) + (x2 * w[1]) - (w[2]);
 
         //função de ativação
        return Math.tanh(soma);
